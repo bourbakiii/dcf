@@ -6,7 +6,7 @@
 import generateMixin from "./mixins/generate.js";
 import typesMixin from "./mixins/types.js";
 export default {
-  mixins:[generateMixin, typesMixin],
+  mixins: [generateMixin, typesMixin],
   data() {
     return {
       player: this.newPlayer(),

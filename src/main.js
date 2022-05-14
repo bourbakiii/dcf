@@ -9,7 +9,6 @@ console.object = function (name, object) {
   console.log(object);
 }
 
-
 new Vue({
   render: h => h(App),
 }).$mount('#app')
