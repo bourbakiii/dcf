@@ -1,14 +1,24 @@
 <template>
-    <div class="card">
-        
-    </div>
+  <button type='button' @click='$emit("click")' :style="{ top: parseInt(card.position.y)+'px', left: parseInt(card.position.x)+'px' }" class="card">
+    {{card.type.type_name}} {{card.health}}
+  </button>
 </template>
 <script>
 export default {
-    props:{
-        card: {
-            required:true
-        }
-    }
-}
+  props: {
+    card: {
+      required: true,
+    },
+  },
+};
 </script>
+<style scoped>
+.card {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border: 1px solid black;
+  transition: 0.5s;
+  cursor: pointer;
+}
+</style>
