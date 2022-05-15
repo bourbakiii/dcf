@@ -1,6 +1,8 @@
 import Vue from 'vue'
+
+import store from './store/index.js'
+
 import App from './App.vue'
-import './assets/styles.scss'
 
 Vue.config.productionTip = false
 
@@ -10,5 +12,7 @@ console.object = function (name, object) {
 }
 
 new Vue({
+  store,
   render: h => h(App),
 }).$mount('#app')
+
