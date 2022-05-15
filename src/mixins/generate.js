@@ -7,8 +7,8 @@ export default {
                 for (let index_column = 0; index_column < columns; index_column++) {
                     if (index_row == 1 && index_column == 1) continue;
                     const position = {
-                        x: this.$store.state.generals.size * index_column,
-                        y: this.$store.state.generals.size * index_row
+                        x: this.$store.state.generals.width * index_column,
+                        y: this.$store.state.generals.height * index_row
                     }
                     to_return.push(this.newCard({ position }));
                 }
@@ -16,7 +16,7 @@ export default {
             return to_return;
         },
         newPlayer() {
-            return this.newCard({ type: this.$store.state.types[0], position: { x: 300, y: 300 } });
+            return this.newCard({ type: this.$store.state.types[0], position: { x: this.$store.state.generals.width, y: this.$store.state.generals.height } });
         },
         newCard(to_concat) {
             let to_return = Object.assign({

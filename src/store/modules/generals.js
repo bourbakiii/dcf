@@ -1,10 +1,11 @@
 export default {
     state: {
-        size: 300,
+        width: 250,
+        height:320,
         points: 0
     },
     mutations: {
-        action(state, action) {
+        generalsAction(state, action) {
             action(state);
         }
     }

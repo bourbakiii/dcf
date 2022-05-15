@@ -4,6 +4,8 @@ import store from './store/index.js'
 
 import App from './App.vue'
 
+import './assets/css/style.css';
+
 Vue.config.productionTip = false
 
 console.object = function (name, object) {

@@ -15,8 +15,8 @@ export default {
 <style scoped>
 .card {
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 320px;
   border: 1px solid black;
   transition: 0.5s;
   cursor: pointer;
