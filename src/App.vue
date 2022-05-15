@@ -38,7 +38,7 @@ export default {
   watch: {
     "player.health": {
       handler(value) {
-        if(value<=0) console.log("ТЫ ПРОИГРАЛ");
+        if(value<=0) nsole.log("ТЫ ПРОИГРАЛ");
       },
       deep: true,
     },

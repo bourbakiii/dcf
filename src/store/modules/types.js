@@ -14,16 +14,16 @@ export default {
             subtypes: [{
                 image: "enemy-1-image.png",
                 name: "Enemy №1",
-                min_health: Math.floor(Math.random() * 20),
+                min_health: Math.floor(Math.random() * 20 + 1),
                 start_health: 10,
-                health_coefficient: 1.1,
-                
+                health_coefficient: 1.005,
+
             },
             {
                 image: "enemy-2-image.png",
                 name: "Enemy №2",
                 start_health: 10,
-                min_health: Math.floor(Math.random() * 30),
+                min_health: Math.floor(Math.random() * 30 + 1),
                 health_coefficient: 1.1,
             }]
         },
@@ -37,12 +37,12 @@ export default {
             id: "type-3",
             type_name: "Bonus",
             subtypes: [{
-                subtype_name: 'heal',
+                name: 'heal',
                 health: 10,
                 image: "heal-image.png",
             },
             {
-                subtype_name: 'poison',
+                name: 'poison',
                 health: 10,
                 image: "poison-image.png",
             }]

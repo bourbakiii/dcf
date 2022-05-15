@@ -1,5 +1,4 @@
 export default {
-
     methods: {
         setCards({ rows, columns }) {
             let to_return = [];
