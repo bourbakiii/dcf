@@ -1,6 +1,6 @@
 <template>
   <button type='button' @click='$emit("click")' :style="{ top: parseInt(card.position.y)+'px', left: parseInt(card.position.x)+'px' }" class="card">
-    {{card.type.type_name}} {{card.health}}
+    {{card.id}}{{card.type.type_name}} {{card.health}}
   </button>
 </template>
 <script>

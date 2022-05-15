@@ -11,7 +11,7 @@ export default {
             type_name: "Enemy",
             image: "enemy-image.png",
             health_coefficient: 1.1,
-            min_health: Math.floor(Math.random()*10),
+            min_health: Math.floor(Math.random()*20),
             after_card: null,
             after_money: false,
         },
