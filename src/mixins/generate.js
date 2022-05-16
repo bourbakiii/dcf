@@ -20,7 +20,7 @@ export default {
         newCard(to_concat) {
             let to_return = Object.assign({
                 id: `card-${Math.random() * 100}`,
-            }, { type: this.getRandomType() }, { ...to_concat });
+            }, { type: this.getRandomType(), poisoned: false }, { ...to_concat });
             return Object.assign(to_return, { health: to_return.type.health ? to_return.type.health : (to_return.type.min_health + to_return.type.health_coefficient * this.$store.state.generals.points).toFixed(0) });
         },
         newCoin({ health, position }) {
