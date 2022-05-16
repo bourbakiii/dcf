@@ -14,6 +14,11 @@ export default {
             )
 
         },
+        switchDamage(card){
+            let card_health_buffer = card.health;
+            card.health = Math.max(0, card.health - this.player.health);
+            this.player.health = Math.max(0, this.player.health - card_health_buffer);
+        },
         click(card) {
 
             
@@ -27,14 +32,16 @@ export default {
 
 
                 if (card.type.type_name == 'Enemy') {
-                    let card_health_buffer = card.health;
-                    card.health = Math.max(0, card.health - this.player.health);
-                    this.player.health = Math.max(0, this.player.health - card_health_buffer);
+                    this.switchDamage(card);
                     if (card.health > 0)
                         this.switchCardsPositions(card, this.player);
 
                     else if (card.health == 0)
                         this.cards.splice(this.cards.map(el => el.id).indexOf(card.id), 1, this.newCoin({ health: card.type.start_health, position: card.position }));
+                }
+                if (card.type.type_name == 'Thorn') {
+                    this.switchDamage(card);
+                    this.goOnCardPosition(card);
                 }
                 else if (card.type.type_name == 'Coin') {
                     this.goOnCardPosition(card);

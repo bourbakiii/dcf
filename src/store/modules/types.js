@@ -46,5 +46,21 @@ export default {
                 health: 10,
                 image: "poison-image.png",
             }]
-        }]
+        },
+        {
+            id: "type-4",
+            type_name: "Thorn",
+            subtypes: [{
+                name: 'thorn',
+                health: 10,
+                image: "thorn-image.png",
+            },
+                // {
+                //     name: 'poison',
+                //     health: 10,
+                //     image: "poison-image.png",
+                // }
+            ]
+        },
+    ]
 }
