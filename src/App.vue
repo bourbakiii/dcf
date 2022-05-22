@@ -9,12 +9,10 @@
         :card="item"
       />
     </transition-group>
-    <transition name='modal-lose'>
-    <div v-if='player.health <= 0' class="modal-lose">
-      <div class="modal-lose__content">
-        Вы проиграли
+    <transition name="modal-lose">
+      <div v-if="player.health <= 0" class="modal-lose">
+        <div class="modal-lose__content">Вы проиграли</div>
       </div>
-    </div>
     </transition>
   </div>
 </template>
@@ -30,15 +28,29 @@ export default {
   mixins: [generateMixin, typesMixin, actionsMixin],
   data() {
     return {
+      able_to_step: true,
       player: this.newPlayer(),
       cards: this.setCards({ rows: 3, columns: 3 }),
-      points: 0,
     };
+  },
+  methods: {
+    startStep() {
+      this.able_to_step = false;
+    },
+    stopStep() {
+      this.able_to_step = true;
+    },
   },
   watch: {
     "player.health": {
       handler(value) {
-        if(value<=0) nsole.log("ТЫ ПРОИГРАЛ");
+        if (value <= 0) console.log("ТЫ ПРОИГРАЛ");
+      },
+      deep: true,
+    },
+    "player.weapon": {
+      handler(value) {
+        if (value != null && value.health == 0) this.player.weapon = null;
       },
       deep: true,
     },
@@ -64,8 +76,8 @@ export default {
   transition-delay: 0.3s;
 }
 
-
-.modal-lose-enter,.modal-lose-leave-to {
+.modal-lose-enter,
+.modal-lose-leave-to {
   opacity: 0;
 }
 .modal-lose-leave-active,
@@ -82,16 +94,24 @@ export default {
   position: relative;
   display: flex;
 }
-.modal-lose{
-  position: fixed;top:0px;left:0px;
-  width:100%;height:100%;
-  background-color: rgba(0,0,0,.3);
-  display: flex;align-items: center;justify-content: center;
+.modal-lose {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.modal-lose__content{
+.modal-lose__content {
   background-color: white;
   padding: 10px;
   border-radius: 15px;
-  display: flex;justify-content: center;align-items: center;flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 </style>

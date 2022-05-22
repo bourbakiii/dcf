@@ -11,20 +11,18 @@ export default {
             type_name: "Enemy",
             after_card: null,
             after_money: false,
+            attack_weapon: true,
             subtypes: [{
                 image: "enemy-1-image.png",
                 name: "Enemy №1",
                 min_health: Math.floor(Math.random() * 20 + 1),
-                start_health: 10,
-                health_coefficient: 1.005,
-
+                start_health: Math.floor(Math.random() * 20 + 1),
             },
             {
                 image: "enemy-2-image.png",
                 name: "Enemy №2",
-                start_health: 10,
+                start_health: Math.floor(Math.random() * 20 + 1),
                 min_health: Math.floor(Math.random() * 30 + 1),
-                health_coefficient: 1.1,
             }]
         },
         {
@@ -38,12 +36,12 @@ export default {
             type_name: "Bonus",
             subtypes: [{
                 name: 'heal',
-                health: 10,
+                health: 5,
                 image: "heal-image.png",
             },
             {
                 name: 'poison',
-                health: 10,
+                health: 4,
                 image: "poison-image.png",
             }]
         },
@@ -52,15 +50,29 @@ export default {
             type_name: "Thorn",
             subtypes: [{
                 name: 'thorn',
-                health: 10,
+                health: 4,
                 image: "thorn-image.png",
             },
-                // {
-                //     name: 'poison',
-                //     health: 10,
-                //     image: "poison-image.png",
-                // }
+            {
+                name: 'thorn-rotatable',
+                health: 4,
+                rotatable: true,
+                sides: {
+                    top:false,
+                    left:false,
+                    down:false,
+                    right: true
+                },
+                image: "thorn-image.png",
+            },
+
             ]
         },
+        {
+            id: "type-4",
+            type_name: 'Weapon',
+            health: 6,
+            image: "weapon-image.png",
+        }
     ]
 }
