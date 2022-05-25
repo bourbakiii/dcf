@@ -13,7 +13,7 @@
     class="card"
   >
    {{ card.type.name || card.type.type_name }} | {{ card.health }}
-
+  <img :src="getImgUrl(card.type.image)" alt="" class="card__image">
    <div v-if='card.type.sides' class="card__sides">
      <div v-if="card.type.sides.left" class="card__sides_left">l-</div>
      <div v-if="card.type.sides.top" class="card__sides_top">t-</div>
@@ -32,6 +32,12 @@ export default {
       required: true,
     },
   },
+  methods:{
+     getImgUrl(pet) {
+    var images = require.context('../assets/', false, /\.png$/)
+    return images('./' + pet)
+  }
+  }
 };
 </script>
 <style scoped>
@@ -49,6 +55,11 @@ export default {
   width: 30px;
   background-color: red;
   display: flex;align-items: center;justify-content: center;flex-direction: column;
+}
+.card__image{
+  width:100%;
+  height:100%;
+  object-fit: contain;
 }
 .card__weapon__health{
   font-size: 18px;
