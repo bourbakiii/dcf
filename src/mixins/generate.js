@@ -15,7 +15,7 @@ export default {
             return to_return;
         },
         newPlayer() {
-            return this.newCard({ type: this.$store.state.types[0], position: { x: this.$store.state.generals.width, y: this.$store.state.generals.height }, weapon: { health: 10 } });
+            return this.newCard({ type: this.$store.state.types[0], position: { x: this.$store.state.generals.width, y: this.$store.state.generals.height }, weapon: { health: 100 } });
         },
         newCard(to_concat) {
             let to_return = Object.assign({

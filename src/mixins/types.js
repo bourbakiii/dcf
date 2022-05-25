@@ -8,6 +8,13 @@ export default {
                 random_type = Object.assign(random_type, selected_subtype);
                 delete random_type.subtypes;
             }
+            if(random_type.sides){
+                random_type.sides = {...random_type.sides};
+                for(let key in random_type.sides){
+                    console.log(key);
+                    random_type.sides[key] = Math.random()>0.5;
+                }
+            }
             return random_type;
         }
     }

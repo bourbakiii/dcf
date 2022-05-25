@@ -1,5 +1,6 @@
 <template>
   <div id="#app" class="app">
+    <p class="app__points">{{$store.state.generals.points}}</p>
     <transition-group name="cards-transition" appear mode="out-in">
       <Card
         @click="click(item)"
@@ -93,6 +94,10 @@ export default {
   background-color: grey;
   position: relative;
   display: flex;
+}
+.app__points{
+  position: absolute; bottom: 100%;
+  color:white;left:0px;
 }
 .modal-lose {
   position: fixed;
