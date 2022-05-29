@@ -91,7 +91,6 @@ export default {
 .app {
   width: calc(250px * 3);
   height: calc(320px * 3);
-  background-color: grey;
   position: relative;
   display: flex;
 }
