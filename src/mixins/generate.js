@@ -15,7 +15,7 @@ export default {
             return to_return;
         },
         newPlayer() {
-            return this.newCard({ type: this.$store.state.types[0], position: { x: this.$store.state.generals.width, y: this.$store.state.generals.height }, weapon: { health: 100 } });
+            return this.newCard({ type: this.$store.state.types[0], position: { x: this.$store.state.generals.width, y: this.$store.state.generals.height }, weapon: { health: 10, image:'weapon-image.png' } });
         },
         newCard(to_concat) {
             let to_return = Object.assign({
@@ -24,13 +24,11 @@ export default {
             return Object.assign(to_return, { health: to_return.type.health ? to_return.type.health : (to_return.type.min_health + this.$store.state.generals.points / 100).toFixed(0) });
         },
         newCoin({ health, position }) {
-            console.log("the health is");
-            console.log(health);
             return Object.assign({
                 id: `card-${Math.random() * 100}`,
             },
-            { type: this.$store.state.types[2] },
-            { health, position });
+                { type: this.$store.state.types[2] },
+                { health, position });
         }
     }
 }

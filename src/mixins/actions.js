@@ -77,6 +77,8 @@ export default {
                     }
                 }
                 else if (card.type.type_name == 'Weapon') {
+                    console.log('card:');
+                    console.log(card);
                     let player_weapon_health = this.player.weapon ? this.player.weapon.health : 0
                     if (player_weapon_health <= card.health) this.player.weapon = card;
                     else this.points += card.health;

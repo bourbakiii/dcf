@@ -13,7 +13,9 @@
     class="card__wrapper"
   >
     <div class="card">
-      
+      <p class="card__health">
+        {{card.health}}
+      </p>
       <img :src="getImgUrl(card.type.image)" alt="" class="card__image" />
       <div v-if="card.type.sides" class="card__sides">
         <div v-if="card.type.sides.left" class="card__sides_left">l-</div>
@@ -22,6 +24,7 @@
         <div v-if="card.type.sides.down" class="card__sides_down">d-</div>
       </div>
       <div class="card__weapon" v-if="card.weapon != null">
+        <img class='card__weapon__image' :src="getImgUrl(card.weapon.image||card.weapon.type.image)"/>
         <p class="card__weapon__health">{{ card.weapon.health }}</p>
       </div>
       <p class="card__name">{{ card.type.name || card.type.type_name }} | {{ card.health }}</p>
@@ -75,6 +78,10 @@ export default {
   transition: 0.1s;
   background-color: rgba(57,58,57);
 }
+.card__health{
+  color:red; font-size: 17px;
+  position: absolute;right:20px;top:0px;
+}
 .card__image {
   width: 50%;
   height: 50%;
@@ -87,13 +94,29 @@ export default {
   position: absolute;left:50%;bottom:10px;
   transform: translateX(-50%);
 }
+.card__weapon{
+  position: absolute;
+  left:40px;
+  width:auto;
+  height:60%;
+}
 .card__weapon__health {
+  color:white;
   font-size: 18px;
+  position: absolute; bottom: -20px; left:50%; transform: translateX(-50%);
+}
+.card__weapon__image{
+  width:auto;
+  height:100%;
+  object-fit: contain;
+  transform: scale(0.7);
 }
 .card__sides {
   position: relative;
 }
-
+.card__wrapper.poisoned .card{
+  background-color: rgb(34, 91, 34, 0.5);
+}
 .card__sides_top {
   transform: rotate(-90deg);
 }
@@ -102,24 +125,5 @@ export default {
 }
 .card__wrapper.player .card{
   border: 5px solid rgba(167, 129, 10);
-  /* background-color: lightblue; */
 }
-/* .card.poisoned {
-  border: 10px solid green;
-}
-.card.heal {
-  background-color: red;
-}
-.card.weapon {
-  background-color: grey;
-}
-.card.enemy {
-  background-color: lightcoral;
-}
-.card.poison {
-  background-color: rgba(105, 45, 105, 0.836);
-} */
-/* .card.coin {
-  background-color: gold;
-} */
 </style>
