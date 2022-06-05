@@ -4,7 +4,7 @@ export default {
             id: "type-0",
             type_name: "Player",
             image: "player-image.png",
-            health: 1940,
+            health:1,
         },
         {
             id: "type-1",

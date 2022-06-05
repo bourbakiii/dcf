@@ -1,13 +1,21 @@
 <template>
   <div id="#app" class="app">
-    <p class="app__points">{{$store.state.generals.points}}</p>
+    <button class="modal-switch" @click="player.health=0">show</button>
+
+    <transition name="modal-transition" appear>
+      <ModalLose :points="$store.state.generals.points" v-if="player.health<=0"/>
+    </transition>
+        <transition name="modal-transition" appear>
+    <ModalStart @setName="setName" v-if="start_modal"/>
+        </transition>
+    <p class="app__points">{{ $store.state.generals.points }}</p>
     <transition-group name="cards-transition" appear mode="out-in">
       <Card
-        @click="click(item)"
-        class="app__card"
-        v-for="item in [...cards, player]"
-        :key="item.id"
-        :card="item"
+          @click="click(item)"
+          class="app__card"
+          v-for="item in [...cards, player]"
+          :key="item.id"
+          :card="item"
       />
     </transition-group>
     <transition name="modal-lose">
@@ -20,21 +28,30 @@
 
 <script>
 import Card from "./components/Card.vue";
+import ModalLose from "./components/ModalLose.vue";
+import ModalStart from "./components/ModalStart.vue";
 import generateMixin from "./mixins/generate.js";
 import typesMixin from "./mixins/types.js";
 import actionsMixin from "./mixins/actions.js";
 
 export default {
-  components: { Card },
+  components: {Card, ModalLose, ModalStart},
   mixins: [generateMixin, typesMixin, actionsMixin],
   data() {
     return {
       able_to_step: true,
       player: this.newPlayer(),
-      cards: this.setCards({ rows: 3, columns: 3 }),
+      cards: this.setCards({rows: 3, columns: 3}),
+      lose: true,
+      name: null,
+      start_modal:true,
     };
   },
   methods: {
+    setName(value) {
+      this.start_modal = false;
+      this.name=value;
+    },
     startStep() {
       this.able_to_step = false;
     },
@@ -60,6 +77,18 @@ export default {
 </script>
 
 <style scoped>
+
+.modal-transition-enter, .modal-transition-leave-to {
+  opacity: 0;
+
+}
+
+
+.modal-transition-enter-active, .modal-transition-leave-active {
+  transition: 0.3s;
+}
+
+
 .cards-transition-enter {
   transform: rotateY(90deg);
   opacity: 0;
@@ -69,35 +98,36 @@ export default {
   transform: rotateY(90deg);
   opacity: 0;
 }
+
 .cards-transition-leave-active,
 .cards-transition-enter-active {
   transition: 0.3s;
 }
+
 .cards-transition-enter-active {
   transition-delay: 0.3s;
 }
 
-.modal-lose-enter,
-.modal-lose-leave-to {
-  opacity: 0;
-}
-.modal-lose-leave-active,
-.modal-lose-enter-active {
-  transition: 0.3s;
-}
-.modal-lose-enter-active {
-  transition-delay: 0.3s;
-}
+
 .app {
   width: calc(250px * 3);
   height: calc(320px * 3);
   position: relative;
   display: flex;
 }
-.app__points{
-  position: absolute; bottom: 100%;
-  color:white;left:0px;
+
+.modal-switch {
+  position: absolute;
+  right: 100%;
 }
+
+.app__points {
+  position: absolute;
+  bottom: 100%;
+  color: white;
+  left: 0px;
+}
+
 .modal-lose {
   position: fixed;
   top: 0px;
@@ -109,6 +139,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .modal-lose__content {
   background-color: white;
   padding: 10px;

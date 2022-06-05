@@ -1,22 +1,22 @@
 <template>
   <button
-    type="button"
-    @click="$emit('click')"
-    :style="{
+      type="button"
+      @click="$emit('click')"
+      :style="{
       top: parseInt(card.position.y) + 'px',
       left: parseInt(card.position.x) + 'px',
     }"
-    :class="[
+      :class="[
       (card.type.name ? card.type.name : card.type.type_name).toLowerCase(),
       card.poisoned ? 'poisoned' : '',
     ]"
-    class="card__wrapper"
+      class="card__wrapper"
   >
     <div class="card">
       <p class="card__health">
-        {{card.health}}
+        {{ card.health }}
       </p>
-      <img :src="getImgUrl(card.type.image)" alt="" class="card__image" />
+      <img :src="getImgUrl(card.type.image)" alt="" class="card__image"/>
       <div v-if="card.type.sides" class="card__sides">
         <div v-if="card.type.sides.left" class="card__sides_left">l-</div>
         <div v-if="card.type.sides.top" class="card__sides_top">t-</div>
@@ -55,18 +55,20 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-
+  box-sizing: border-box;
   overflow: hidden;
   transition: 0.5s;
   background-color: inherit;
   overflow: hidden;
   padding: 4px;
-  border:none;
+  border: none;
   cursor: pointer;
 }
-.card__wrapper:not(.player):hover .card{
+
+.card__wrapper:not(.player):hover .card {
   border: 5px solid grey;
 }
+
 .card {
   display: flex;
   justify-content: space-around;
@@ -75,55 +77,75 @@ export default {
   width: 100%;
   height: 100%;
   border: 1px solid black;
-  transition: 0.1s;
-  background-color: rgba(57,58,57);
+  transition: 0.2s;
+  background-color: var(--card-color);
+  box-sizing: border-box;
 }
-.card__health{
-  color:red; font-size: 17px;
-  position: absolute;right:20px;top:0px;
+
+.card__health {
+  color: red;
+  font-size: 17px;
+  position: absolute;
+  right: 20px;
+  top: 0px;
 }
+
 .card__image {
   width: 50%;
   height: 50%;
   object-fit: contain;
   background-color: transparent;
 }
-.card__name{
-  color:white;
+
+.card__name {
+  color: white;
   font-size: 14px;
-  position: absolute;left:50%;bottom:10px;
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
   transform: translateX(-50%);
 }
-.card__weapon{
+
+.card__weapon {
   position: absolute;
-  left:40px;
-  width:auto;
-  height:60%;
+  left: 40px;
+  width: auto;
+  height: 60%;
 }
+
 .card__weapon__health {
-  color:white;
+  color: white;
   font-size: 18px;
-  position: absolute; bottom: -20px; left:50%; transform: translateX(-50%);
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
-.card__weapon__image{
-  width:auto;
-  height:100%;
+
+.card__weapon__image {
+  width: auto;
+  height: 100%;
   object-fit: contain;
   transform: scale(0.7);
 }
+
 .card__sides {
   position: relative;
 }
-.card__wrapper.poisoned .card{
+
+.card__wrapper.poisoned .card {
   background-color: rgb(34, 91, 34, 0.5);
 }
+
 .card__sides_top {
   transform: rotate(-90deg);
 }
+
 .card__sides_bottom {
   transform: rotate(90deg);
 }
-.card__wrapper.player .card{
+
+.card__wrapper.player .card {
   border: 5px solid rgba(167, 129, 10);
 }
 </style>

@@ -4,13 +4,25 @@ export default {
             const width = this.$store.state.generals.width;
             const height = this.$store.state.generals.height;
             return (
-                JSON.stringify(card.position) == JSON.stringify({ x: this.player.position.x - width, y: this.player.position.y })
+                JSON.stringify(card.position) == JSON.stringify({
+                    x: this.player.position.x - width,
+                    y: this.player.position.y
+                })
                 ||
-                JSON.stringify(card.position) == JSON.stringify({ x: this.player.position.x + width, y: this.player.position.y })
+                JSON.stringify(card.position) == JSON.stringify({
+                    x: this.player.position.x + width,
+                    y: this.player.position.y
+                })
                 ||
-                JSON.stringify(card.position) == JSON.stringify({ x: this.player.position.x, y: this.player.position.y - height })
+                JSON.stringify(card.position) == JSON.stringify({
+                    x: this.player.position.x,
+                    y: this.player.position.y - height
+                })
                 ||
-                JSON.stringify(card.position) == JSON.stringify({ x: this.player.position.x, y: this.player.position.y + height })
+                JSON.stringify(card.position) == JSON.stringify({
+                    x: this.player.position.x,
+                    y: this.player.position.y + height
+                })
             )
 
         },
@@ -24,6 +36,9 @@ export default {
             let card_health_buffer = card.health;
             card.health = Math.max(0, card.health - player.health);
             player.health = Math.max(0, player.health - card_health_buffer);
+            if (player.health <= 0) {
+                this.lose = true
+            }
         },
         click(card) {
             if (!this.able_to_step) return;
@@ -37,34 +52,32 @@ export default {
                     if (card.health > 0) {
                         if (!this.player.weapon)
                             this.switchCardsPositions(card, this.player);
-                    }
-                    else if (card.health == 0) {
-                        this.cards.splice(this.cards.map(el => el.id).indexOf(card.id), 1, this.newCoin({ health: card.type.start_health, position: card.position }));
+                    } else if (card.health == 0) {
+                        this.cards.splice(this.cards.map(el => el.id).indexOf(card.id), 1, this.newCoin({
+                            health: card.type.start_health,
+                            position: card.position
+                        }));
                     }
                 }
                 if (card.type.type_name == 'Thorn') {
                     if (card.type.name == 'thorn-rotatable') {
-                        if (this.checkForASides({ sides: card.type.sides, position: card.position })) {
+                        if (this.checkForASides({sides: card.type.sides, position: card.position})) {
                             this.addPoints(card.health);
                             this.switchDamage(card);
                             this.goOnCardPosition(card);
-                        }
-                        else {
+                        } else {
                             this.addPoints(card.health);
                             this.goOnCardPosition(card);
                         }
-                    }
-                    else {
+                    } else {
                         this.addPoints(card.health);
                         this.switchDamage(card);
                         this.goOnCardPosition(card);
                     }
-                }
-                else if (card.type.type_name == 'Coin') {
+                } else if (card.type.type_name == 'Coin') {
                     this.goOnCardPosition(card);
                     this.addPoints(card.health);
-                }
-                else if (card.type.type_name == 'Bonus') {
+                } else if (card.type.type_name == 'Bonus') {
                     this.goOnCardPosition(card);
                     console.object('typename', card.type.name)
                     if (card.type.name == 'heal') {
@@ -75,8 +88,7 @@ export default {
                         this.player.health -= card.health;
                         this.player.poisoned = true;
                     }
-                }
-                else if (card.type.type_name == 'Weapon') {
+                } else if (card.type.type_name == 'Weapon') {
                     console.log('card:');
                     console.log(card);
                     let player_weapon_health = this.player.weapon ? this.player.weapon.health : 0
@@ -88,7 +100,7 @@ export default {
             this.stopStep();
         },
         switchCardsPositions(card1, card2) {
-            let position_buffer = { ...card1.position };
+            let position_buffer = {...card1.position};
             card1.position = card2.position;
             card2.position = position_buffer;
         },
@@ -96,11 +108,11 @@ export default {
             let adjacent_cards = this.cards.filter(card => this.is_adjacent(card))
             let random_index = Math.floor(Math.random() * adjacent_cards.length);
             this.switchCardsPositions(card, this.player);
-            this.cards.splice(this.cards.map(el => el.id).indexOf(card.id), 1, this.newCard({ position: { ...adjacent_cards[random_index].position } }))
+            this.cards.splice(this.cards.map(el => el.id).indexOf(card.id), 1, this.newCard({position: {...adjacent_cards[random_index].position}}))
             adjacent_cards[random_index].position = card.position;
         },
-        checkForASides({ sides, position }) {
-            let { x, y } = this.player.position;
+        checkForASides({sides, position}) {
+            let {x, y} = this.player.position;
             if (position.x < x) if (sides.right) return true;
             if (position.x > x) if (sides.left) return true;
             if (position.y < y) if (sides.bottom) return true;
