@@ -1,14 +1,12 @@
 <template>
   <div id="#app" class="app">
-    <button class="modal-switch" @click="player.health=0">show</button>
-
     <transition name="modal-transition" appear>
-      <ModalLose :points="$store.state.generals.points" v-if="player.health<=0"/>
+      <ModalLose @close="setGame" :name="name" :points="$store.state.generals.points" v-if="player.health<=0"/>
     </transition>
-        <transition name="modal-transition" appear>
-    <ModalStart @setName="setName" v-if="start_modal"/>
-        </transition>
-    <p class="app__points">{{ $store.state.generals.points }}</p>
+    <transition name="modal-transition" appear>
+      <ModalStart @setName="setName" v-if="start_modal"/>
+    </transition>
+    <p class="app__points">Очки: <span class="app__points__value">{{ $store.state.generals.points }}</span></p>
     <transition-group name="cards-transition" appear mode="out-in">
       <Card
           @click="click(item)"
@@ -40,17 +38,17 @@ export default {
   data() {
     return {
       able_to_step: true,
-      player: this.newPlayer(),
-      cards: this.setCards({rows: 3, columns: 3}),
-      lose: true,
+      player: {},
+      cards: [],
+      lose: false,
       name: null,
-      start_modal:true,
+      start_modal: true,
     };
   },
   methods: {
     setName(value) {
       this.start_modal = false;
-      this.name=value;
+      this.name = value;
     },
     startStep() {
       this.able_to_step = false;
@@ -58,6 +56,18 @@ export default {
     stopStep() {
       this.able_to_step = true;
     },
+    setGame() {
+      this.start_modal = true,
+          this.able_to_step = true,
+          this.player = this.newPlayer(),
+          this.cards = this.setCards({rows: 3, columns: 3}),
+          this.lose = true,
+          this.name = null,
+          this.start_modal = true;
+    }
+  },
+  created() {
+    this.setGame();
   },
   watch: {
     "player.health": {
@@ -126,6 +136,12 @@ export default {
   bottom: 100%;
   color: white;
   left: 0px;
+  font-size: 20px;
+}
+
+.app__points__value {
+  margin-left: 10px;
+  font-size: 25px;
 }
 
 .modal-lose {

@@ -4,7 +4,7 @@ export default {
             id: "type-0",
             type_name: "Player",
             image: "player-image.png",
-            health:1,
+            health: 20,
         },
         {
             id: "type-1",
@@ -18,12 +18,12 @@ export default {
                 min_health: Math.floor(Math.random() * 20 + 1),
                 start_health: Math.floor(Math.random() * 20 + 1),
             },
-            {
-                image: "enemy-2-image.png",
-                name: "Enemy №2",
-                start_health: Math.floor(Math.random() * 20 + 1),
-                min_health: Math.floor(Math.random() * 30 + 1),
-            }]
+                {
+                    image: "enemy-2-image.png",
+                    name: "Enemy №2",
+                    start_health: Math.floor(Math.random() * 20 + 1),
+                    min_health: Math.floor(Math.random() * 30 + 1),
+                }]
         },
         {
             id: "type-2",
@@ -39,11 +39,11 @@ export default {
                 health: 5,
                 image: "heal-image.png",
             },
-            {
-                name: 'poison',
-                health: 4,
-                image: "poison-image.png",
-            }]
+                {
+                    name: 'poison',
+                    health: 4,
+                    image: "poison-image.png",
+                }]
         },
         {
             id: "type-4",
@@ -53,18 +53,18 @@ export default {
                 health: 4,
                 image: "thorn-image.png",
             },
-            {
-                name: 'thorn-rotatable',
-                health: 4,
-                rotatable: true,
-                sides: {
-                    top:false,
-                    left:false,
-                    down:false,
-                    right: true
+                {
+                    name: 'thorn-rotatable',
+                    health: 4,
+                    rotatable: true,
+                    sides: {
+                        top: false,
+                        left: false,
+                        down: false,
+                        right: true
+                    },
+                    image: "thorn-image.png",
                 },
-                image: "thorn-image.png",
-            },
 
             ]
         },
