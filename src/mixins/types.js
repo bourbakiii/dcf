@@ -7,7 +7,7 @@ export default {
             // console.log(free_types)
             // let randomed_range = Math.floor(Math.random() * (63 + 1));
 
-            let type = free_types.filter(element => element.range.from >= randomed_range && element.range.to <= randomed_range);
+            // let type = free_types.filter(element => element.range.from >= randomed_range && element.range.to <= randomed_range);
             // console.log(type);
 
             let random_type = {...this.$store.state.types[Math.floor(Math.random() * (this.$store.state.types.length - 1)) + 1]};
