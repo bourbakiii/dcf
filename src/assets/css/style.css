@@ -2,6 +2,7 @@
     --player-border: rgba(167, 129, 10);
     --body-color: rgba(36, 40, 45);
     --card-color: rgba(57, 58, 57);
+    --health-color: #9b3737;
 }
 
 body {

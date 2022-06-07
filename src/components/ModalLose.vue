@@ -10,12 +10,11 @@
       <div class="modal-lose__table">
         <div class="modal-lose__table__item" v-for="(item, index) in table_of_records" :key="index">
           <p class="modal-lose__table__item__name">
-            {{item.name}}
+            {{ item.name }}
           </p>
           <span class="modal-lose__table__item__points">
-            {{item.points}}
+            {{ item.points }}
           </span>
-
         </div>
       </div>
       <button @click="$emit('close')" type="button" class="modal-lose__restart">Новая игра</button>
@@ -75,7 +74,8 @@ export default {
 }
 
 .modal-lose__title {
-  color: #9b3737;
+  color: var(--health-color);
+
   font-size: 50px;
   margin: 0px 0px 20px 0px;
 }
@@ -110,22 +110,25 @@ export default {
   width: 100%;
   height: 80px;
   background-color: var(--player-border);
-  margin-bottom:10px;
+  margin-bottom: 10px;
   display: flex;
-  align-items: center;justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
   padding: 0px 10px;
   box-sizing: border-box;
 }
 
 
 .modal-lose__table__item:last-of-type {
-  margin-bottom:0px;
+  margin-bottom: 0px;
 }
-.modal-lose__table__item__name{
+
+.modal-lose__table__item__name {
   font-size: 25px;
   margin: 0;
 }
-.modal-lose__table__item__points{
+
+.modal-lose__table__item__points {
   font-size: 30px;
 }
 

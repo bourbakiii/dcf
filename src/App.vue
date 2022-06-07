@@ -4,15 +4,20 @@
       <ModalLose @close="setGame" :name="name" :points="$store.state.generals.points" v-if="player.health<=0"/>
     </transition>
     <transition name="modal-transition" appear>
+      <ModalDescription :info="descriptionModal" v-if="descriptionModal" @close="descriptionModal=null"/>
+    </transition>
+    <transition name="modal-transition" appear>
       <ModalStart @setName="setName" v-if="start_modal"/>
     </transition>
     <p class="app__points">Очки: <span class="app__points__value">{{ $store.state.generals.points }}</span></p>
     <transition-group name="cards-transition" appear mode="out-in">
       <Card
+          v-long-press="600"
+          @long-press-start="openDescriptionModal({...item.type.info, image: item.type.image})"
           @click="click(item)"
           class="app__card"
           v-for="item in [...cards, player]"
-          :key="item.id"
+          :key="`card-${item.id}`"
           :card="item"
       />
     </transition-group>
@@ -31,9 +36,14 @@ import ModalStart from "./components/ModalStart.vue";
 import generateMixin from "./mixins/generate.js";
 import typesMixin from "./mixins/types.js";
 import actionsMixin from "./mixins/actions.js";
+import LongPress from 'vue-directive-long-press'
+import ModalDescription from "@/components/ModalDescription";
 
 export default {
-  components: {Card, ModalLose, ModalStart},
+  directives: {
+    'long-press': LongPress
+  },
+  components: {ModalDescription, Card, ModalLose, ModalStart},
   mixins: [generateMixin, typesMixin, actionsMixin],
   data() {
     return {
@@ -43,9 +53,13 @@ export default {
       lose: false,
       name: null,
       start_modal: true,
+      descriptionModal: null
     };
   },
   methods: {
+    openDescriptionModal(info) {
+      this.descriptionModal = info;
+    },
     setName(value) {
       this.start_modal = false;
       this.name = value;

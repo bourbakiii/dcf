@@ -17,17 +17,11 @@
         {{ card.health }}
       </p>
       <img :src="getImgUrl(card.type.image)" alt="" class="card__image"/>
-      <div v-if="card.type.sides" class="card__sides">
-        <div v-if="card.type.sides.left" class="card__sides_left">l-</div>
-        <div v-if="card.type.sides.top" class="card__sides_top">t-</div>
-        <div v-if="card.type.sides.right" class="card__sides_right">r-</div>
-        <div v-if="card.type.sides.down" class="card__sides_down">d-</div>
-      </div>
       <div class="card__weapon" v-if="card.weapon != null">
         <img class='card__weapon__image' :src="getImgUrl(card.weapon.image||card.weapon.type.image)"/>
         <p class="card__weapon__health">{{ card.weapon.health }}</p>
       </div>
-      <p class="card__name">{{ card.type.name || card.type.type_name }} | {{ card.health }}</p>
+      <p class="card__name">{{ card.type.info.name }}</p>
     </div>
   </button>
 </template>
@@ -83,7 +77,8 @@ export default {
 }
 
 .card__health {
-  color: red;
+  color: var(--health-color);
+
   font-size: 17px;
   position: absolute;
   right: 20px;
