@@ -32,7 +32,7 @@ export default {
                     name: "Enemy №2",
                     start_health: Math.floor(Math.random() * 7 + 1),
                     min_health: Math.floor(Math.random() * 7 + 1),
-                    coefficient: 0.04,
+                    coefficient: 2,
                     range: {from: 10, to: 17},
 
                     info: {
