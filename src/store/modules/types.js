@@ -21,7 +21,7 @@ export default {
                 name: "Enemy №1",
                 min_health: Math.floor(Math.random() * 4 + 1),
                 start_health: Math.floor(Math.random() * 4 + 1),
-                range: {from: 0, to: 10},
+                range: {from: 0, to: 7},
                 info: {
                     name: "Орк",
                     description: "Орки — раса уродливых, жестоких и агрессивных монстров. Орки враждебны всему прекрасному и чистому, склонны к вандализму. Обычный враг."
@@ -33,7 +33,7 @@ export default {
                     start_health: Math.floor(Math.random() * 7 + 1),
                     min_health: Math.floor(Math.random() * 7 + 1),
                     coefficient: 2,
-                    range: {from: 10, to: 17},
+                    range: {from: 7, to: 12},
 
                     info: {
                         name: "Исчадие",
@@ -46,7 +46,7 @@ export default {
             type_name: "Coin",
             image: "coin-image.png",
             health: 10,
-            range: {from: 17, to: 30},
+            range: {from: 12, to: 20},
             info: {
                 name: "Монетка",
                 description: "При взаимодействии прибавляет к очкам игрока значение равное количеству здоровья карточки."
@@ -59,7 +59,7 @@ export default {
                 name: 'heal',
                 health: 5,
                 image: "heal-image.png",
-                range: {from: 30, to: 44},
+                range: {from: 20, to: 26},
 
                 info: {
                     name: "Зелье лечения",
@@ -70,7 +70,7 @@ export default {
                     name: 'poison',
                     health: 4,
                     image: "poison-image.png",
-                    range: {from: 44, to: 50},
+                    range: {from: 26, to: 32},
 
                     info: {
                         name: "Яд",
@@ -85,8 +85,7 @@ export default {
                 name: 'thorn',
                 health: 4,
                 image: "thorn-image.png",
-                range: {from: 50, to: 55},
-
+                range: {from: 32, to: 35},
                 info: {
                     name: "Кактус",
                     description: "При взаимодейтсвии наносит урон равный количеству здоровья карточки."
@@ -99,7 +98,7 @@ export default {
             type_name: 'Weapon',
             health: 6,
             image: "weapon-image.png",
-            range: {from: 50, to: 63},
+            range: {from: 35, to: 41},
             info: {
                 name: "Меч",
                 description: "Можно подобрать, чтобы атаковать монстров"

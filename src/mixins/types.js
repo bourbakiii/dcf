@@ -1,31 +1,25 @@
+import types from "@/store/modules/types";
+
 export default {
     methods: {
         getRandomType() {
 
 
             // СДЕЛАТЬ!!!
-            let all_types = [...this.$store.state.types.slice(1, this.$store.state.types.length)].filter(el => (el.subtypes || []).length);
-
-
-
-            // let index = 0;
-            // while (index < all_types.length) {
-            //     if (all_types[index].subtypes.length) {
-            //         index+=all_types[index].subtypes.length;
-            //         all_types.splice(index, 1, [...all_types[index].subtypes]);
-            //     }
-            //     else index++;
-            // }
-            console.log("The all types is:");
-            console.log(all_types);
-
-            let random_type = {...this.$store.state.types[1]};
-            if (random_type.subtypes && random_type.subtypes.length) {
-                let selected_subtype = random_type.subtypes[Math.floor(Math.random() * random_type.subtypes.length)]
-                random_type = Object.assign(random_type, selected_subtype);
-                delete random_type.subtypes;
+            let types_with_subtypes = [...this.$store.state.types.slice(1, this.$store.state.types.length).filter(el => (el.subtypes || []).length)];
+            let all_subtypes = [];
+            for (let type of types_with_subtypes) {
+                type.subtypes.forEach(el => all_subtypes.push(Object.assign({...type}, {...el})));
             }
-            return random_type;
+            all_subtypes.forEach(el => delete el.subtypes);
+            all_subtypes = all_subtypes.concat([...this.$store.state.types.slice(1, this.$store.state.types.length).filter(el => !el.subtypes || !el.subtypes.length)]);
+            const maximal_range = Math.max(...all_subtypes.map(el => el.range.to)) + 1;
+
+            const random_number = Math.floor(Math.random() * maximal_range);
+
+            const to_return_type = all_subtypes.filter(el => random_number >= el.range.from && random_number <= el.range.to)[0] || all_subtypes[0];
+
+            return to_return_type;
         }
     }
 }
