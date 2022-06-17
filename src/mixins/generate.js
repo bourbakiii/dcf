@@ -18,7 +18,7 @@ export default {
             return this.newCard({
                 type: this.$store.state.types[0],
                 position: {x: this.$store.state.generals.width, y: this.$store.state.generals.height},
-                weapon: {health: 1000, image: 'weapon-image.png'}
+                weapon: {health: 10, image: 'weapon-image.png'}
             });
         },
         newCard(to_concat) {
